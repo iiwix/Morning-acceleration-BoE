@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080a0c">
+<title>BE ON EDGE — News Archive</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@400;500;600;700;800&display=swap');
+:root{--bg:#080a0c;--panel:#171a1f;--panel2:#101317;--yellow:#ffe000;--white:#f5f5f2;--muted:#8c929d;--line:#383d43;--green:#2bf18c;--red:#e15d65}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.topbar{height:70px;border-bottom:1px solid #353933;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);position:sticky;top:0;background:#080a0cf2;backdrop-filter:blur(12px);z-index:5}
+.brand{font-family:'Russo One',Impact,sans-serif;font-style:italic;font-size:clamp(17px,2.4vw,25px);letter-spacing:.3px}.brand em{color:var(--yellow);font-style:normal}
+.top-note{font-size:11px;color:var(--muted);letter-spacing:2px;font-weight:800}
+.wrap{max-width:1180px;margin:0 auto;padding:32px clamp(16px,3vw,34px) 90px}
+.eyebrow{font-size:11px;letter-spacing:2px;color:var(--yellow);font-weight:800;margin:0 0 10px}
+h1,h2,h3,.display{font-family:'Russo One',Impact,sans-serif;font-weight:400;margin:0;line-height:1.08}
+h1{font-size:clamp(31px,5vw,58px);letter-spacing:.2px;text-transform:uppercase}
+.subhead{color:var(--muted);font-size:13px;font-weight:800;letter-spacing:1.5px;margin-top:12px}
+.title-rule{width:36px;height:6px;background:var(--yellow);margin:18px 0 0}
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:22px;margin-top:30px}
+.panel{background:linear-gradient(140deg,#191d22,#111419);border:1px solid #2c3138;border-radius:14px;position:relative}
+.panel:before{content:"";position:absolute;left:-1px;top:-1px;width:100px;height:4px;background:var(--yellow)}
+.sidebar{padding:20px;height:max-content;position:sticky;top:88px}
+.btn{border:1px solid var(--yellow);background:var(--yellow);color:#080a0c;font-weight:800;padding:12px 14px;text-transform:uppercase;letter-spacing:.3px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);transition:.15s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.btn.full{width:100%}
+.btn.secondary{background:transparent;color:var(--yellow)}.btn.ghost{background:#20242a;color:var(--white);border-color:#41464e}
+.side-label{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:1.7px;margin:24px 0 10px}
+.collection-list{display:grid;gap:8px}.collection-item{width:100%;text-align:left;background:#101317;color:var(--white);border:1px solid #343a42;padding:12px;border-radius:7px}
+.collection-item.active{border-color:var(--yellow);box-shadow:inset 3px 0 var(--yellow)}.collection-item strong{display:block;font-size:13px}.collection-item small{color:var(--muted);display:block;margin-top:5px}
+.content{min-width:0}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.toolbar h2{font-size:clamp(21px,3vw,30px)}.toolbar-actions{display:flex;gap:8px;flex-wrap:wrap}
+.collection-hero{padding:24px;margin-bottom:18px;border:1px solid var(--yellow);background:linear-gradient(110deg,#252718,#111419 70%);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%)}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.collection-hero h2{font-size:clamp(23px,3.2vw,37px);overflow-wrap:anywhere}.meta{color:var(--muted);font-size:12px;font-weight:800;letter-spacing:1px;margin-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 28px}.chip{border:1px solid var(--yellow);color:var(--white);background:#101317;padding:8px 12px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));font-size:12px;font-weight:800}.chip.active{background:var(--yellow);color:#080a0c}
+.section-head{display:flex;align-items:center;gap:12px;margin:20px 0 14px}.section-head:before{content:"";height:28px;width:5px;background:var(--yellow)}.section-head h3{font-size:22px}.section-head span{color:var(--muted);font-size:11px;font-weight:800;margin-left:auto}
+.post-list{display:grid;gap:12px}.post{display:grid;grid-template-columns:112px minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px;background:linear-gradient(120deg,#171b20,#0f1216);border:1px solid #3a4047;clip-path:polygon(0 0,calc(100% - 13px) 0,100% 13px,100% 100%,13px 100%,0 calc(100% - 13px))}
+.post-thumb{width:112px;height:86px;object-fit:cover;background:#252a31;border:1px solid #454b53}.post-placeholder{display:grid;place-items:center;color:var(--yellow);font-family:'Russo One';font-size:23px;width:112px;height:86px;background:repeating-linear-gradient(135deg,#20242a,#20242a 10px,#171a1f 10px,#171a1f 20px)}
+.source{font-size:10px;letter-spacing:1.5px;font-weight:800;color:var(--muted);margin-bottom:8px}.post h4{font-family:'Russo One',Impact,sans-serif;font-size:17px;font-weight:400;line-height:1.25;margin:0 0 12px;overflow-wrap:anywhere}.post-footer{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.tag{border:1px solid var(--yellow);color:var(--yellow);padding:5px 10px;font-size:11px;font-weight:800}.post a{color:var(--yellow);font-size:22px;text-decoration:none;padding:8px}.post-actions{display:flex;gap:4px;align-items:center}.icon-btn{border:1px solid #454b53;background:#101317;color:var(--yellow);border-radius:6px;padding:8px;font-weight:800}
+.empty{border:1px dashed #454b53;padding:30px;text-align:center;color:var(--muted);border-radius:8px;line-height:1.6}
+.notice{font-size:12px;color:var(--muted);line-height:1.5;margin-top:16px}
+dialog{background:#15191e;color:var(--white);border:1px solid var(--yellow);border-radius:12px;padding:0;width:min(560px,calc(100% - 24px));max-height:90vh;overflow:auto}
+dialog::backdrop{background:#000b;backdrop-filter:blur(4px)}.modal-head{padding:20px 22px;border-bottom:1px solid #373d45;display:flex;justify-content:space-between;align-items:center}.modal-head h2{font-size:22px}.modal-body{padding:22px;display:grid;gap:14px}.field{display:grid;gap:7px}.field label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:1px;text-transform:uppercase}.field input,.field textarea,.field select{width:100%;border:1px solid #414751;background:#090b0e;color:var(--white);border-radius:6px;padding:12px;outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--yellow)}.field textarea{min-height:82px;resize:vertical}.modal-actions{display:flex;gap:8px;justify-content:flex-end;padding:0 22px 22px;flex-wrap:wrap}
+.mobile-nav{display:none}.hidden{display:none!important}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--yellow);color:#090b0e;padding:12px 18px;font-size:13px;font-weight:800;z-index:20;box-shadow:0 5px 25px #0008}
+.public-banner{background:#222714;border:1px solid var(--yellow);padding:12px 15px;color:var(--yellow);font-size:12px;font-weight:800;margin-bottom:18px}
+@media(max-width:760px){.topbar{height:62px}.top-note{display:none}.wrap{padding-top:25px}.layout{grid-template-columns:1fr;margin-top:24px}.sidebar{position:static;padding:15px}.sidebar .side-label{margin-top:14px}.collection-list{display:flex;overflow:auto;padding-bottom:3px}.collection-item{min-width:180px}.sidebar .btn{width:100%}.toolbar{align-items:flex-start;flex-direction:column}.toolbar-actions{width:100%}.toolbar-actions .btn{flex:1}.collection-hero{padding:18px}.post{grid-template-columns:78px minmax(0,1fr);gap:11px;padding:10px}.post-thumb,.post-placeholder{width:78px;height:75px}.post h4{font-size:14px}.post a{grid-column:2;justify-self:end;padding:0 5px}.post-actions{grid-column:2;justify-content:flex-end}.mobile-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#080a0cf5;border-top:1px solid #363b41;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:6}.mobile-nav button{background:none;border:0;color:var(--muted);font-size:10px;font-weight:800;display:grid;gap:5px;justify-items:center}.mobile-nav button span{font-size:20px}.mobile-nav button.active{color:var(--yellow)}.wrap{padding-bottom:115px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">BE ON EDGE <em>///</em></div>
+  <div class="top-note">MOTORSPORT MEDIA · NEWS ARCHIVE</div>
+</header>
+<main class="wrap">
+  <p class="eyebrow">BE ON EDGE / INTERNAL TOOL</p>
+  <h1>News archive</h1>
+  <div class="subhead">YOUR MOTORSPORT LIBRARY</div><div class="title-rule"></div>
+  <div id="publicBanner" class="public-banner hidden">SHARED COLLECTION · VIEW ONLY</div>
+  <div class="layout">
+    <aside class="panel sidebar" id="sidebar">
+      <button class="btn full" id="newCollection">＋ New collection</button>
+      <div class="side-label">YOUR COLLECTIONS</div>
+      <div class="collection-list" id="collectionList"></div>
+      <div class="side-label">WORKSPACE</div>
+      <button class="btn secondary full" id="exportBtn">Export backup JSON</button>
+      <p class="notice">This prototype saves data in this browser. Export a backup regularly. Shared links contain a snapshot of one collection.</p>
+    </aside>
+    <section class="content">
+      <div class="toolbar">
+        <h2 id="sectionTitle">Collections</h2>
+        <div class="toolbar-actions" id="toolbarActions">
+          <button class="btn secondary" id="addCategory">＋ Category</button>
+          <button class="btn" id="addPost">＋ Add post</button>
+        </div>
+      </div>
+      <div id="mainContent"></div>
+    </section>
+  </div>
+</main>
+<nav class="mobile-nav">
+  <button class="active" data-nav="collections"><span>▤</span>COLLECTIONS</button>
+  <button data-nav="posts"><span>▣</span>POSTS</button>
+  <button data-nav="settings"><span>⚙</span>SETTINGS</button>
+</nav>
+<dialog id="modal">
+  <form id="modalForm">
+    <div class="modal-head"><h2 id="modalTitle">New collection</h2><button type="button" class="icon-btn" id="closeModal">✕</button></div>
+    <div class="modal-body" id="modalFields"></div>
+    <div class="modal-actions"><button type="button" class="btn ghost" id="cancelModal">Cancel</button><button class="btn" type="submit">Save</button></div>
+  </form>
+</dialog>
+<input type="file" id="importFile" accept="application/json" class="hidden">
+<div id="toast" class="toast hidden" role="status"></div>
+<script>
+const DEFAULT_CATEGORIES=['F1','F2','F3','F1 Academy','FREC','F4','NASCAR'];
+// Safari/local-file compatibility: crypto.randomUUID may be unavailable outside secure contexts.
+function uuid(){return (globalThis.crypto && typeof globalThis.crypto.randomUUID==='function') ? globalThis.crypto.randomUUID() : 'id-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,11)}
+const seed={collections:[
+ {id:uuid(),name:'Weekly News #01',description:'Главные новости гоночной недели',categories:[...DEFAULT_CATEGORIES],posts:[
+ {id:uuid(),title:'Qualifying pace sets the tone in Barcelona',url:'https://t.me/',category:'F2',note:'Добавь ссылку на настоящий пост в Telegram'},
+ {id:uuid(),title:'Race weekend: key moments',url:'https://t.me/',category:'F1',note:'Пример карточки публикации'}
+ ]},
+ {id:uuid(),name:'Race weekend — Barcelona',description:'Подборка материалов к гоночному уик-энду',categories:[...DEFAULT_CATEGORIES],posts:[]}
+],activeId:null};
+let state=loadState(), activeCategory='ALL', readOnly=false, sharedView=false, currentModalAction=null;
+if(!state.activeId)state.activeId=state.collections[0]?.id||null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function loadState(){try{const raw=localStorage.getItem('beoe-archive-v1');return raw?JSON.parse(raw):seed}catch(e){return seed}}
+function save(){if(!sharedView){localStorage.setItem('beoe-archive-v1',JSON.stringify(state))}}
+function active(){return state.collections.find(c=>c.id===state.activeId)||state.collections[0]}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2600)}
+function categoryCount(c){return new Set(c.posts.map(p=>p.category).filter(Boolean)).size}
+function render(){
+ const c=active();$('collectionList').innerHTML=state.collections.map(x=>`<button class="collection-item ${x.id===c?.id?'active':''}" data-id="${x.id}"><strong>${esc(x.name)}</strong><small>${x.posts.length} POSTS · ${x.categories.length} CATEGORIES</small></button>`).join('')||'<div class="empty">No collections yet.</div>';
+ document.querySelectorAll('.collection-item').forEach(b=>b.onclick=()=>{if(sharedView)return;state.activeId=b.dataset.id;activeCategory='ALL';save();render()});
+ $('toolbarActions').classList.toggle('hidden',readOnly);
+ $('sidebar').classList.toggle('hidden',sharedView);
+ $('publicBanner').classList.toggle('hidden',!sharedView);
+ if(!c){$('mainContent').innerHTML='<div class="empty">Create your first collection to get started.</div>';return}
+ const visible=c.posts.filter(p=>activeCategory==='ALL'||p.category===activeCategory);
+ $('sectionTitle').textContent=sharedView?'Shared collection':'Collection editor';
+ $('mainContent').innerHTML=`
+ <div class="collection-hero"><div class="hero-top"><div><p class="eyebrow">— COLLECTION —</p><h2>${esc(c.name)}</h2><div class="meta">${c.posts.length} POSTS &nbsp;·&nbsp; ${c.categories.length} CATEGORIES</div>${c.description?`<p style="color:#c3c7ce;line-height:1.5;margin-bottom:0">${esc(c.description)}</p>`:''}</div>${!readOnly?'<button class="btn" id="shareBtn" title="Share collection">↗ SHARE</button>':''}</div></div>
+ <div class="chips"><button class="chip ${activeCategory==='ALL'?'active':''}" data-cat="ALL">ALL POSTS</button>${c.categories.map(cat=>`<button class="chip ${activeCategory===cat?'active':''}" data-cat="${esc(cat)}">${esc(cat)}</button>`).join('')}${!readOnly?'<button class="chip" id="renameCat">＋ EDIT CATEGORIES</button>':''}</div>
+ <div class="section-head"><h3>Publications</h3><span>${visible.length} POSTS</span></div>
+ <div class="post-list">${visible.map(p=>`<article class="post">
+ ${p.image?`<img class="post-thumb" src="${esc(p.image)}" alt="" onerror="this.outerHTML='<div class=&quot;post-placeholder&quot;>BOE</div>'">`:`<div class="post-placeholder">${esc(p.category||'BOE')}</div>`}
+ <div><div class="source">◉ TELEGRAM ${p.note?`· ${esc(p.note)}`:''}</div><h4>${esc(p.title||'Telegram publication')}</h4><div class="post-footer"><span class="tag">${esc(p.category||'UNCATEGORIZED')}</span></div></div>
+ <div class="post-actions"><a href="${safeUrl(p.url)}" target="_blank" rel="noopener noreferrer" title="Open Telegram post">↗</a>${!readOnly?`<button class="icon-btn" data-edit="${p.id}" title="Edit">✎</button><button class="icon-btn" data-delete="${p.id}" title="Delete">×</button>`:''}</div>
+ </article>`).join('')||'<div class="empty">No posts in this category yet.<br>Add a Telegram link to start building your archive.</div>'}</div>`;
+ document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{activeCategory=b.dataset.cat;render()});
+ if($('shareBtn'))$('shareBtn').onclick=shareActive;
+ if($('renameCat'))$('renameCat').onclick=editCategories;
+ document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openPostForm(b.dataset.edit));
+ document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>deletePost(b.dataset.delete));
+}
+function safeUrl(raw){try{const u=new URL(raw);return ['https:','http:'].includes(u.protocol)?esc(u.href):'#'}catch{return '#'}}
+function openModal(title,fields,submit){$('modalTitle').textContent=title;$('modalFields').innerHTML=fields;currentModalAction=submit;$('modal').showModal()}
+function field(name,label,value='',placeholder='',type='text'){return `<div class="field"><label for="${name}">${label}</label><input id="${name}" name="${name}" type="${type}" value="${esc(value)}" placeholder="${esc(placeholder)}" ${name==='url'?'':' '}></div>`}
+function createCollection(){if(readOnly)return;openModal('New collection',field('name','Collection name','','e.g. Weekly News #02')+`<div class="field"><label for="description">Description</label><textarea id="description" name="description" placeholder="Short description"></textarea></div>`,data=>{const c={id:uuid(),name:data.get('name').trim(),description:data.get('description').trim(),categories:[...DEFAULT_CATEGORIES],posts:[]};if(!c.name)return toast('Enter a collection name');state.collections.unshift(c);state.activeId=c.id;activeCategory='ALL';save();render();toast('Collection created')})}
+function openPostForm(postId=null){if(readOnly)return;const c=active();if(!c)return toast('Create a collection first');const p=postId?c.posts.find(x=>x.id===postId):null;
+const categoryOptions=c.categories.map(x=>`<option ${p?.category===x?'selected':''} value="${esc(x)}">${esc(x)}</option>`).join('');
+openModal(p?'Edit publication':'Add Telegram publication',field('url','Telegram post URL',p?.url||'','https://t.me/channel/123','url')+field('title','Title',p?.title||'','Short headline')+`<div class="field"><label for="category">Category</label><select id="category" name="category">${categoryOptions}<option value="Other">Other</option></select></div>`+field('image','Image URL (optional)',p?.image||'','https://...','url')+field('note','Note (optional)',p?.note||'','Source, context, etc.'),data=>{const url=data.get('url').trim();try{const u=new URL(url);if(!['http:','https:'].includes(u.protocol))throw 0}catch{return toast('Enter a valid http(s) URL')}const item={id:p?.id||uuid(),url,title:data.get('title').trim()||'Telegram publication',category:data.get('category')||'Other',image:data.get('image').trim(),note:data.get('note').trim()};if(p)Object.assign(p,item);else c.posts.unshift(item);if(!c.categories.includes(item.category))c.categories.push(item.category);activeCategory='ALL';save();render();toast(p?'Publication updated':'Publication added')})}
+function editCategories(){const c=active();openModal('Edit categories',`<div class="field"><label for="cats">One category per line</label><textarea id="cats" name="cats">${esc(c.categories.join('\n'))}</textarea></div><p class="notice">Existing posts keep their current category. Add or rename categories here; use the post editor to reassign posts.</p>`,data=>{const arr=[...new Set(data.get('cats').split('\n').map(x=>x.trim()).filter(Boolean))];if(!arr.length)return toast('Keep at least one category');c.categories=arr;activeCategory='ALL';save();render();toast('Categories updated')})}
+function deletePost(id){if(!confirm('Delete this publication?'))return;const c=active();c.posts=c.posts.filter(p=>p.id!==id);save();render();toast('Publication deleted')}
+function shareActive(){const c=active();if(!c)return;const payload=btoa(unescape(encodeURIComponent(JSON.stringify(c))));const url=location.href.split('#')[0]+'#share='+payload; if(url.length>7000){toast('This collection is too large for a share link. A server is needed.');return}if(navigator.share){navigator.share({title:c.name,url}).catch(()=>copyText(url))}else copyText(url); }
+async function copyText(text){try{await navigator.clipboard.writeText(text);toast('Share link copied')}catch{prompt('Copy this share link:',text)}}
+function exportBackup(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='be-on-edge-archive-backup.json';a.click();URL.revokeObjectURL(url);toast('Backup exported')}
+function handleShareHash(){const match=location.hash.match(/share=([^&]+)/);if(!match)return false;try{const c=JSON.parse(decodeURIComponent(escape(atob(match[1]))));if(!c||!Array.isArray(c.posts)||!Array.isArray(c.categories))throw 0;state={collections:[c],activeId:c.id};sharedView=true;readOnly=true;activeCategory='ALL';return true}catch(e){toast('Could not open this shared collection');return false}}
+function settingsView(){if(readOnly)return; $('sectionTitle').textContent='Settings';$('toolbarActions').classList.add('hidden');$('mainContent').innerHTML=`<div class="panel" style="padding:22px"><p class="eyebrow">WORKSPACE</p><h2 style="font-size:25px">Archive settings</h2><p class="notice">This starter version stores collections in this browser only. Import or export a JSON backup to move your data between devices.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><button class="btn" id="exportSetting">Export backup</button><button class="btn secondary" id="importSetting">Import backup</button><button class="btn ghost" id="resetDemo">Restore demo data</button></div><p class="notice">For real multi-user accounts, private share permissions, automatic Telegram previews and permanent links, connect a backend database and authentication.</p></div>`;$('exportSetting').onclick=exportBackup;$('importSetting').onclick=()=>$('importFile').click();$('resetDemo').onclick=()=>{if(confirm('Replace this browser archive with demo data?')){state=structuredClone(seed);state.activeId=state.collections[0].id;save();render()}}}
+$('newCollection').onclick=createCollection;$('addPost').onclick=()=>openPostForm();$('addCategory').onclick=editCategories;$('exportBtn').onclick=exportBackup;
+$('closeModal').onclick=$('cancelModal').onclick=()=>$('modal').close();
+$('modalForm').onsubmit=e=>{e.preventDefault();if(currentModalAction)currentModalAction(new FormData(e.currentTarget));$('modal').close()};
+$('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const imported=JSON.parse(await file.text());if(!Array.isArray(imported.collections))throw 0;state=imported;state.activeId=state.activeId||state.collections[0]?.id;save();render();toast('Backup imported')}catch{toast('Invalid backup file')}e.target.value=''};
+document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-nav]').forEach(x=>x.classList.toggle('active',x===b));if(b.dataset.nav==='settings'){settingsView()}else{render();if(b.dataset.nav==='posts'){$('sectionTitle').textContent='Publications';activeCategory='ALL'}}});
+handleShareHash();render();
+</script>
+</body>
+</html>
